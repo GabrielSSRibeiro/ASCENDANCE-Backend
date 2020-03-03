@@ -10,6 +10,7 @@ module.exports = {
   },
 
   async show(req, res) {
+    //
     const { nickName } = req.query;
     let user = await User.findOne({ nickName });
 
