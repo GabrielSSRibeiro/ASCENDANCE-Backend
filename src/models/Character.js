@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Item = require("./Item");
 
 const CharacterSchema = new mongoose.Schema({
   user: String,
@@ -16,7 +17,7 @@ const CharacterSchema = new mongoose.Schema({
   inspiration: Number,
 
   prestige: Number,
-  feats: [String],
+  feats: [String], //propria schema com stats pq alterar valores?
   enhancingAscension: Number,
   modifingAscension: Number,
 
@@ -45,21 +46,21 @@ const CharacterSchema = new mongoose.Schema({
   change: Number,
   control: Number,
 
-  ofensiveItems: [String],
+  ofensiveItems: [Item],
   movementSpeed: String,
   attack: Number,
   damage: Number,
-  defensiveItems: [String],
+  defensiveItems: [Item],
   initiative: String,
   dodge: Number,
   defense: Number,
-  otherItems: [String],
+  otherItems: [Item],
 
-  equipWeapon1: String,
-  equipWeapon2: String,
-  equipArmor1: String,
-  equipArmor2: String,
-  equipOther: String,
+  equipWeapon1: Item,
+  equipWeapon2: Item,
+  equipArmor1: Item,
+  equipArmor2: Item,
+  equipOther: Item,
 
   money1: Number,
   money2: Number,
