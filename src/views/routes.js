@@ -12,7 +12,8 @@ routes.get("/users", UserController.index);
 routes.get("/user", UserController.show);
 routes.post("/users", UserController.store);
 
-routes.get("/gm-games", GameController.index);
+routes.get("/gm-games", GameController.indexGM);
+routes.get("/player-games", GameController.indexPlayer);
 routes.post("/gm-games", GameController.store);
 
 routes.get("/gm-panel", GameController.show);

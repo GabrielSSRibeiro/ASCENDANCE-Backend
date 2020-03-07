@@ -1,12 +1,22 @@
 const Game = require("../models/Game");
 
 module.exports = {
-  //lista de jogos
-  async index(req, res) {
-    const { user, name, party } = req.query;
+  //lista de jogos GM
+  async indexGM(req, res) {
+    const { user } = req.query;
 
     const games = await Game.find({
       user
+    });
+
+    return res.json(games);
+  },
+  //lista de jogos que o jogador está na party
+  async indexPlayer(req, res) {
+    const { party } = req.query;
+
+    const games = await Game.find({
+      party
     });
 
     return res.json(games);
@@ -47,7 +57,7 @@ module.exports = {
     const { user, name, newParty } = req.body;
 
     let game = await Game.findOne({ user, name });
-    
+
     const party = game.party.concat(newParty);
 
     await Game.updateOne({ user, name }, { party });
