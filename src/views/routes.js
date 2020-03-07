@@ -9,6 +9,7 @@ routes.get("/", (req, res) => {
 });
 
 routes.get("/users", UserController.index);
+routes.get("/user", UserController.show);
 routes.post("/users", UserController.store);
 
 routes.get("/gm-games", GameController.index);

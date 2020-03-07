@@ -10,7 +10,7 @@ module.exports = {
   },
 
   async show(req, res) {
-    //
+    //pegar usuario logado
     const { nickName } = req.query;
     let user = await User.findOne({ nickName });
 
