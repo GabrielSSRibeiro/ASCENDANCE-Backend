@@ -12,9 +12,11 @@ routes.get("/users", UserController.index);
 routes.get("/user", UserController.show);
 routes.post("/users", UserController.store);
 
-routes.get("/gm-games", GameController.indexGM);
 routes.get("/player-games", GameController.indexPlayer);
+routes.get("/gm-games", GameController.indexGM);
 routes.post("/gm-games", GameController.store);
+routes.delete("/player-games", GameController.deletePlayer);
+routes.delete("/gm-games", GameController.deleteGM);
 
 routes.get("/gm-panel", GameController.show);
 

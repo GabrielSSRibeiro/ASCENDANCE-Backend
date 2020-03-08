@@ -63,5 +63,35 @@ module.exports = {
     await Game.updateOne({ user, name }, { party });
 
     return res.json(party);
+  },
+
+  // deletar um jogo do jogador
+  async deletePlayer(req, res) {
+    let { name, party } = req.query;
+
+    let game = await Game.findOne({ name, party });
+    const user = party;
+
+    const index = game.party.indexOf(party);
+
+    game.party.splice(index, 1);
+
+    party = game.party;
+
+    await Game.updateOne({ user, name }, { party });
+
+    return res.json(party);
+  },
+
+  // deletar um jogo do GM
+  async deleteGM(req, res) {
+    const { user, name } = req.query;
+
+    await Game.deleteOne({
+      user,
+      name
+    });
+
+    return res.json("Completed");
   }
 };
