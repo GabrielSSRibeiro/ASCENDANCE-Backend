@@ -3,11 +3,6 @@ const routes = Router();
 const UserController = require("../controllers/UserController");
 const GameController = require("../controllers/GameController");
 
-routes.get("/", (req, res) => {
-  landingPage = "Hello World";
-  return res.json(landingPage);
-});
-
 routes.get("/users", UserController.index);
 routes.get("/user", UserController.show);
 routes.post("/users", UserController.store);
