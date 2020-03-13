@@ -58,7 +58,6 @@ module.exports = {
     const { user, name, playerUser } = req.body;
 
     const foundPlayer = await User.findOne({ nickName: playerUser });
-    console.log(foundPlayer);
 
     let game;
     if (foundPlayer) {
@@ -78,19 +77,6 @@ module.exports = {
   // deletar um jogo do jogador
   async deletePlayer(req, res) {
     let { name, playerUser } = req.query;
-
-    // let game = await Game.findOne({ name, party });
-    // const user = playerUser;
-
-    // const index = game.party.indexOf(party);
-
-    // game.party.splice(index, 1);
-
-    // party = game.party;
-
-    // await Game.updateOne({ user, name }, { party });
-
-    // return res.json(party);
 
     const game = await Game.findOneAndUpdate(
       { name },
