@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const Item = require("./Item");
+const ItemSchema = require("./Item");
 
 const CharacterSchema = new mongoose.Schema({
   user: String,
-  game: String,
   name: String,
   avatar: String,
   notesGM: String,
@@ -46,21 +45,21 @@ const CharacterSchema = new mongoose.Schema({
   change: Number,
   control: Number,
 
-  ofensiveItems: [Item],
+  ofensiveItems: [ItemSchema],
   movementSpeed: String,
   attack: Number,
   damage: Number,
-  defensiveItems: [Item],
+  defensiveItems: [ItemSchema],
   initiative: String,
   dodge: Number,
   defense: Number,
-  otherItems: [Item],
+  otherItems: [ItemSchema],
 
-  equipWeapon1: Item,
-  equipWeapon2: Item,
-  equipArmor1: Item,
-  equipArmor2: Item,
-  equipOther: Item,
+  equipWeapon1: ItemSchema,
+  equipWeapon2: ItemSchema,
+  equipArmor1: ItemSchema,
+  equipArmor2: ItemSchema,
+  equipOther: ItemSchema,
 
   money1: Number,
   money2: Number,
@@ -70,4 +69,4 @@ const CharacterSchema = new mongoose.Schema({
   moneyX: Number
 });
 
-module.exports = mongoose.model("Character", CharacterSchema);
+module.exports = CharacterSchema;

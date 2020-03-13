@@ -19,4 +19,4 @@ const ItemSchema = new mongoose.Schema({
   unidentitied: Boolean
 });
 
-module.exports = mongoose.model("Item", ItemSchema);
+module.exports = ItemSchema;

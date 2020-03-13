@@ -1,4 +1,5 @@
 const Game = require("../models/Game");
+const User = require("../models/User");
 
 module.exports = {
   //lista de jogos GM
@@ -13,10 +14,10 @@ module.exports = {
   },
   //lista de jogos que o jogador está na party
   async indexPlayer(req, res) {
-    const { party } = req.query;
+    const { user } = req.query;
 
     const games = await Game.find({
-      party
+      "party.user": user
     });
 
     return res.json(games);
@@ -26,12 +27,12 @@ module.exports = {
   async show(req, res) {
     const { user, name } = req.query;
 
-    const games = await Game.findOne({
+    const game = await Game.findOne({
       user,
       name
     });
 
-    return res.json(games);
+    return res.json(game);
   },
 
   //criando novo jogo
@@ -46,7 +47,7 @@ module.exports = {
         name
       });
     } else {
-      newGame = { message: "Jogo já existe." };
+      newGame = "";
     }
 
     return res.json(newGame);
@@ -54,33 +55,50 @@ module.exports = {
 
   //adicionando membros a party
   async update(req, res) {
-    const { user, name, newParty } = req.body;
+    const { user, name, playerUser } = req.body;
 
-    let game = await Game.findOne({ user, name });
+    const foundPlayer = await User.findOne({ nickName: playerUser });
+    console.log(foundPlayer);
 
-    const party = game.party.concat(newParty);
+    let game;
+    if (foundPlayer) {
+      // add to existing party
+      game = await Game.findOneAndUpdate(
+        { user, name },
+        { $push: { party: { user: playerUser } } },
+        { new: true }
+      );
+    } else {
+      game = "";
+    }
 
-    await Game.updateOne({ user, name }, { party });
-
-    return res.json(party);
+    return res.json(game);
   },
 
   // deletar um jogo do jogador
   async deletePlayer(req, res) {
-    let { name, party } = req.query;
+    let { name, playerUser } = req.query;
 
-    let game = await Game.findOne({ name, party });
-    const user = party;
+    // let game = await Game.findOne({ name, party });
+    // const user = playerUser;
 
-    const index = game.party.indexOf(party);
+    // const index = game.party.indexOf(party);
 
-    game.party.splice(index, 1);
+    // game.party.splice(index, 1);
 
-    party = game.party;
+    // party = game.party;
 
-    await Game.updateOne({ user, name }, { party });
+    // await Game.updateOne({ user, name }, { party });
 
-    return res.json(party);
+    // return res.json(party);
+
+    const game = await Game.findOneAndUpdate(
+      { name },
+      { $pull: { party: { user: playerUser } } },
+      { new: true }
+    );
+
+    return res.json(game);
   },
 
   // deletar um jogo do GM

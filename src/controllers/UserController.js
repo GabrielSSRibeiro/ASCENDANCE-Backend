@@ -3,7 +3,7 @@ const User = require("../models/User");
 module.exports = {
   async index(req, res) {
     //fazer login
-    const { nickName, password } = req.query;
+    const { nickName } = req.query;
     let user = await User.findOne({ nickName });
 
     return res.json(user);

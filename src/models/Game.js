@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const CharacterSchema = require("./Character");
 
 const GameSchema = new mongoose.Schema({
   user: String,
   name: String,
-  party: [String],
+  party: [CharacterSchema],
   taticalMap: Boolean,
   d4: Number,
   d6: Number,
