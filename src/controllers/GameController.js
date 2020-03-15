@@ -91,7 +91,7 @@ module.exports = {
   async deleteGM(req, res) {
     const { user, name } = req.query;
 
-    const games = await Game.findOneAndUpdate({ user }, { name }, { new: true });
+    const games = await Game.findOneAndUpdate({ user }, { $pull: { name } }, { new: true });
 
     // await Game.deleteOne({
     //   user,
