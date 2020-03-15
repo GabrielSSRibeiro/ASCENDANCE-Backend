@@ -91,12 +91,14 @@ module.exports = {
   async deleteGM(req, res) {
     const { user, name } = req.query;
 
-    const games = await Game.findOneAndUpdate({ user }, { $pull: { name } }, { new: true });
+    await Game.deleteOne({
+      user,
+      name
+    });
 
-    // await Game.deleteOne({
-    //   user,
-    //   name
-    // });
+    const games = await Game.find({
+      user
+    });
 
     return res.json(games);
   }
