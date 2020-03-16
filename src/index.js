@@ -2,10 +2,15 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require("http");
 const routes = require("./views/routes");
+const { setupWebsocket } = require("./views/websocket");
 
 const app = express();
-//
+const server = http.Server(app);
+
+setupWebsocket(server);
+
 app.set("views", path.join(__dirname, "views"));
 
 mongoose.connect(
