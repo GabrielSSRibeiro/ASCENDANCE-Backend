@@ -1,6 +1,6 @@
 const Game = require("../models/Game");
 const User = require("../models/User");
-const { findConnections, sendMessage } = require("../views/websocket");
+const { sendMessage } = require("../views/websocket");
 
 module.exports = {
   //lista de jogos GM
@@ -69,6 +69,7 @@ module.exports = {
         { new: true }
       );
 
+      //sochet message to the members of the game
       sendMessage(game.party, "newMember");
     } else {
       game = "";

@@ -1,10 +1,20 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   async index(req, res) {
     //fazer login
-    const { nickName } = req.query;
+    const { nickName, password } = req.query;
     let user = await User.findOne({ nickName });
+
+    if (user) {
+      //check encrypt
+      if (await bcrypt.compare(password, user.password)) {
+        user = user.password;
+      } else {
+        user = "";
+      }
+    }
 
     return res.json(user);
   },
@@ -24,10 +34,12 @@ module.exports = {
     let newUser = await User.findOne({ nickName });
 
     if (!newUser) {
+      const encryptPassword = await bcrypt.hash(password, 5);
+
       newUser = await User.create({
         nickName,
         email,
-        password
+        password: encryptPassword
       });
     } else {
       newUser = "";
