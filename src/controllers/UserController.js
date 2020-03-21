@@ -10,7 +10,7 @@ module.exports = {
     if (user) {
       //check encrypt
       if (await bcrypt.compare(password, user.password)) {
-        user = user.password;
+        user = nickName;
       } else {
         user = "";
       }
