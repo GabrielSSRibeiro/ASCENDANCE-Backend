@@ -4,8 +4,12 @@ const CharacterSchema = require("./Character");
 const GameSchema = new mongoose.Schema({
   user: String,
   name: String,
+
   party: [CharacterSchema],
+  encounter: [String],
+
   taticalMap: Boolean,
+
   d4: Number,
   d6: Number,
   d8: Number,

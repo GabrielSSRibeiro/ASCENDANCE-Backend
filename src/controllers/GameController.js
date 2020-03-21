@@ -1,5 +1,6 @@
 const Game = require("../models/Game");
 const User = require("../models/User");
+const { findConnections, sendMessage } = require("../views/websocket");
 
 module.exports = {
   //lista de jogos GM
@@ -67,6 +68,8 @@ module.exports = {
         { $push: { party: { user: playerUser } } },
         { new: true }
       );
+
+      sendMessage(game.party, "newMember");
     } else {
       game = "";
     }

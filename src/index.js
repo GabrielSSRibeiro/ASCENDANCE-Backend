@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
@@ -10,8 +9,6 @@ const app = express();
 const server = http.Server(app);
 
 setupWebsocket(server);
-
-app.set("views", path.join(__dirname, "views"));
 
 mongoose.connect(
   "mongodb+srv://admin-Gabriel:12351235@cluster0-l8gqo.mongodb.net/ESSENCIA?retryWrites=true&w=majority",
@@ -42,4 +39,4 @@ app.use(allowCrossDomain);
 app.use(express.json());
 app.use(routes);
 
-app.listen(process.env.PORT || 3333);
+server.listen(process.env.PORT || 3333);
