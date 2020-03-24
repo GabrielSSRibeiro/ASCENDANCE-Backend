@@ -2,6 +2,7 @@ const { Router } = require("express");
 const routes = Router();
 const UserController = require("../controllers/UserController");
 const GameController = require("../controllers/GameController");
+const CharacterController = require("../controllers/CharacterController");
 
 routes.get("/users", UserController.index);
 routes.get("/user", UserController.show);
@@ -13,8 +14,11 @@ routes.post("/gm-games", GameController.store);
 routes.delete("/player-games", GameController.deletePlayer);
 routes.delete("/gm-games", GameController.deleteGM);
 
-routes.get("/gm-panel", GameController.show);
+//CharCreation
+routes.put("/char-creation", CharacterController.update);
 
+// GM
+routes.get("/gm-panel", GameController.show);
 routes.put("/gm-management", GameController.update);
 
 module.exports = routes;

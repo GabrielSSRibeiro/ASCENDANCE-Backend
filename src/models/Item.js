@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 
 const ItemSchema = new mongoose.Schema({
-  name: String,
-  specialty: Boolean,
+  name: { type: String, default: "" },
+  specialty: { type: Boolean, default: false },
 
-  attack: Number,
-  damage: Number,
-  dodge: Number,
-  defense: Number,
-  intelligence: Number,
-  strength: Number,
-  charisma: Number,
-  constitution: Number,
-  dexterity: Number,
-  wisdom: Number,
+  attack: { type: Number, default: 0 },
+  damage: { type: Number, default: 0 },
+  dodge: { type: Number, default: 0 },
+  defense: { type: Number, default: 0 },
+  intelligence: { type: Number, default: 0 },
+  strength: { type: Number, default: 0 },
+  charisma: { type: Number, default: 0 },
+  constitution: { type: Number, default: 0 },
+  dexterity: { type: Number, default: 0 },
+  wisdom: { type: Number, default: 0 },
 
-  unique: String,
-  unidentitied: Boolean
+  unique: { type: String, default: "" },
+  unidentitied: { type: Boolean, default: false }
 });
 
 module.exports = ItemSchema;

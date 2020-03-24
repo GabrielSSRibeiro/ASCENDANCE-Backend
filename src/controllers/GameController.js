@@ -5,10 +5,10 @@ const { sendMessage } = require("../views/websocket");
 module.exports = {
   //lista de jogos GM
   async indexGM(req, res) {
-    const { user } = req.query;
+    const { GM } = req.query;
 
     const games = await Game.find({
-      user
+      GM
     });
 
     return res.json(games);
@@ -26,11 +26,11 @@ module.exports = {
 
   // party de um jogo especifico
   async show(req, res) {
-    const { user, name } = req.query;
+    const { GM, title } = req.query;
 
     const game = await Game.findOne({
-      user,
-      name
+      GM,
+      title
     });
 
     return res.json(game);
@@ -38,14 +38,14 @@ module.exports = {
 
   //criando novo jogo
   async store(req, res) {
-    const { user, name } = req.body;
+    const { GM, title } = req.body;
 
-    let newGame = await Game.findOne({ user, name });
+    let newGame = await Game.findOne({ GM, title });
 
     if (!newGame) {
       newGame = await Game.create({
-        user,
-        name
+        GM,
+        title
       });
     } else {
       newGame = "";
@@ -56,7 +56,7 @@ module.exports = {
 
   //adicionando membros a party
   async update(req, res) {
-    const { user, name, playerUser } = req.body;
+    const { GM, title, playerUser } = req.body;
 
     const foundPlayer = await User.findOne({ nickName: playerUser });
 
@@ -64,7 +64,7 @@ module.exports = {
     if (foundPlayer) {
       // add to existing party
       game = await Game.findOneAndUpdate(
-        { user, name },
+        { GM, title },
         { $push: { party: { user: playerUser } } },
         { new: true }
       );
@@ -80,10 +80,10 @@ module.exports = {
 
   // deletar um jogo do jogador
   async deletePlayer(req, res) {
-    let { name, playerUser } = req.query;
+    let { title, playerUser } = req.query;
 
     const game = await Game.findOneAndUpdate(
-      { name },
+      { title },
       { $pull: { party: { user: playerUser } } },
       { new: true }
     );
@@ -93,15 +93,15 @@ module.exports = {
 
   // deletar um jogo do GM
   async deleteGM(req, res) {
-    const { user, name } = req.query;
+    const { GM, title } = req.query;
 
     await Game.deleteOne({
-      user,
-      name
+      GM,
+      title
     });
 
     const games = await Game.find({
-      user
+      GM
     });
 
     return res.json(games);
