@@ -12,7 +12,7 @@ module.exports = {
       if (await bcrypt.compare(password, user.password)) {
         user = nickName;
       } else {
-        user = "";
+        user = "incorrect";
       }
     }
 
