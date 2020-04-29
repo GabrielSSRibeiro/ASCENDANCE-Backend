@@ -8,7 +8,7 @@ module.exports = {
     const { GM } = req.query;
 
     const games = await Game.find({
-      GM
+      GM,
     });
 
     return res.json(games);
@@ -18,7 +18,7 @@ module.exports = {
     const { user } = req.query;
 
     const games = await Game.find({
-      "party.user": user
+      "party.user": user,
     });
 
     return res.json(games);
@@ -30,7 +30,7 @@ module.exports = {
 
     const game = await Game.findOne({
       GM,
-      title
+      title,
     });
 
     return res.json(game);
@@ -45,7 +45,7 @@ module.exports = {
     if (!newGame) {
       newGame = await Game.create({
         GM,
-        title
+        title,
       });
     } else {
       newGame = "";
@@ -59,18 +59,23 @@ module.exports = {
     const { GM, title, playerUser } = req.body;
 
     const foundPlayer = await User.findOne({ nickName: playerUser });
+    const partyMember = await Game.findOne({ GM, title, "party.user": playerUser });
 
     let game;
     if (foundPlayer) {
-      // add to existing party
-      game = await Game.findOneAndUpdate(
-        { GM, title },
-        { $push: { party: { user: playerUser } } },
-        { new: true }
-      );
+      if (!partyMember) {
+        // add to existing party
+        game = await Game.findOneAndUpdate(
+          { GM, title },
+          { $push: { party: { user: playerUser } } },
+          { new: true }
+        );
 
-      //sochet message to the members of the game
-      sendMessage(game.party, "newMember");
+        //sochet message to the members of the game
+        sendMessage(game.party, "newMember");
+      } else {
+        game = "member";
+      }
     } else {
       game = "";
     }
@@ -97,13 +102,13 @@ module.exports = {
 
     await Game.deleteOne({
       GM,
-      title
+      title,
     });
 
     const games = await Game.find({
-      GM
+      GM,
     });
 
     return res.json(games);
-  }
+  },
 };
