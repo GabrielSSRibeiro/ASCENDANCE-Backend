@@ -1,6 +1,7 @@
 const Game = require("../models/Game");
 
 module.exports = {
+  //atualizar personagem
   async update(req, res) {
     const {
       user,
@@ -34,7 +35,8 @@ module.exports = {
       defensiveItems,
       otherItems,
       avatar,
-      name
+      name,
+      level,
     } = req.body;
     let game = "No changes.";
 
@@ -43,7 +45,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, GM, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.race": race }
+          $set: { "party.$.race": race },
         },
         { new: true }
       );
@@ -53,7 +55,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.lifeDie": lifeDie }
+          $set: { "party.$.lifeDie": lifeDie },
         },
         { new: true }
       );
@@ -63,7 +65,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.disciplines": disciplines }
+          $set: { "party.$.disciplines": disciplines },
         },
         { new: true }
       );
@@ -73,7 +75,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.class": selectedClass }
+          $set: { "party.$.class": selectedClass },
         },
         { new: true }
       );
@@ -83,7 +85,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.feel": feel }
+          $set: { "party.$.feel": feel },
         },
         { new: true }
       );
@@ -93,7 +95,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.create": create }
+          $set: { "party.$.create": create },
         },
         { new: true }
       );
@@ -103,7 +105,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.change": change }
+          $set: { "party.$.change": change },
         },
         { new: true }
       );
@@ -113,7 +115,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.control": control }
+          $set: { "party.$.control": control },
         },
         { new: true }
       );
@@ -123,7 +125,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.defensiveSpecialty": defensiveSpecialty }
+          $set: { "party.$.defensiveSpecialty": defensiveSpecialty },
         },
         { new: true }
       );
@@ -133,7 +135,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.ofensiveSpecialty": ofensiveSpecialty }
+          $set: { "party.$.ofensiveSpecialty": ofensiveSpecialty },
         },
         { new: true }
       );
@@ -143,7 +145,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.past": past }
+          $set: { "party.$.past": past },
         },
         { new: true }
       );
@@ -153,7 +155,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.gameModifier": gameModifier }
+          $set: { "party.$.gameModifier": gameModifier },
         },
         { new: true }
       );
@@ -163,7 +165,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.personality": personality }
+          $set: { "party.$.personality": personality },
         },
         { new: true }
       );
@@ -173,7 +175,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.occupation": occupation }
+          $set: { "party.$.occupation": occupation },
         },
         { new: true }
       );
@@ -183,7 +185,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.goal": goal }
+          $set: { "party.$.goal": goal },
         },
         { new: true }
       );
@@ -193,7 +195,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.flaws": flaws }
+          $set: { "party.$.flaws": flaws },
         },
         { new: true }
       );
@@ -203,7 +205,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.firstAlignment": firstAlignment }
+          $set: { "party.$.firstAlignment": firstAlignment },
         },
         { new: true }
       );
@@ -213,7 +215,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.secondAlignment": secondAlignment }
+          $set: { "party.$.secondAlignment": secondAlignment },
         },
         { new: true }
       );
@@ -223,7 +225,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.intelligence": intelligence }
+          $set: { "party.$.intelligence": intelligence },
         },
         { new: true }
       );
@@ -233,7 +235,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.strength": strength }
+          $set: { "party.$.strength": strength },
         },
         { new: true }
       );
@@ -243,7 +245,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.charisma": charisma }
+          $set: { "party.$.charisma": charisma },
         },
         { new: true }
       );
@@ -253,7 +255,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.constitution": constitution }
+          $set: { "party.$.constitution": constitution },
         },
         { new: true }
       );
@@ -263,7 +265,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.dexterity": dexterity }
+          $set: { "party.$.dexterity": dexterity },
         },
         { new: true }
       );
@@ -273,7 +275,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.wisdom": wisdom }
+          $set: { "party.$.wisdom": wisdom },
         },
         { new: true }
       );
@@ -283,7 +285,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.ofensiveItems": ofensiveItems }
+          $set: { "party.$.ofensiveItems": ofensiveItems },
         },
         { new: true }
       );
@@ -293,7 +295,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.defensiveItems": defensiveItems }
+          $set: { "party.$.defensiveItems": defensiveItems },
         },
         { new: true }
       );
@@ -303,7 +305,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.otherItems": otherItems }
+          $set: { "party.$.otherItems": otherItems },
         },
         { new: true }
       );
@@ -313,7 +315,7 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.avatar": avatar }
+          $set: { "party.$.avatar": avatar },
         },
         { new: true }
       );
@@ -323,12 +325,12 @@ module.exports = {
       game = await Game.findOneAndUpdate(
         { title, party: { $elemMatch: { user } } },
         {
-          $set: { "party.$.name": name }
+          $set: { "party.$.name": name },
         },
         { new: true }
       );
     }
 
     return res.json(game);
-  }
+  },
 };
