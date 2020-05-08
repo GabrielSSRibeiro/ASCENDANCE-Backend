@@ -16,7 +16,7 @@ const CharacterSchema = new mongoose.Schema({
   inspiration: { type: Number, default: 0 },
 
   prestige: { type: Number, default: 1 },
-  feats: [String], //propria schema com stats pq alterar valores?
+  feats: [String],
   enhancingAscension: Number,
   modifingAscension: Number,
 
@@ -70,7 +70,6 @@ const CharacterSchema = new mongoose.Schema({
   money3: { type: Number, default: 0 },
   money4: { type: Number, default: 0 },
   money5: { type: Number, default: 0 },
-  moneyX: { type: Number, default: 0 }
 });
 
 module.exports = CharacterSchema;
