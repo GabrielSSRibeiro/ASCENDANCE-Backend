@@ -31,14 +31,10 @@ module.exports = {
       constitution,
       dexterity,
       wisdom,
-      ofensiveItems,
-      defensiveItems,
-      otherItems,
       avatar,
       name,
-      level,
     } = req.body;
-    let game = "No changes.";
+    let game = "";
 
     // race
     if (race) {
@@ -276,36 +272,6 @@ module.exports = {
         { title, party: { $elemMatch: { user } } },
         {
           $set: { "party.$.wisdom": wisdom },
-        },
-        { new: true }
-      );
-    }
-    // ofensiveItems
-    if (ofensiveItems) {
-      game = await Game.findOneAndUpdate(
-        { title, party: { $elemMatch: { user } } },
-        {
-          $set: { "party.$.ofensiveItems": ofensiveItems },
-        },
-        { new: true }
-      );
-    }
-    // defensiveItems
-    if (defensiveItems) {
-      game = await Game.findOneAndUpdate(
-        { title, party: { $elemMatch: { user } } },
-        {
-          $set: { "party.$.defensiveItems": defensiveItems },
-        },
-        { new: true }
-      );
-    }
-    // otherItems
-    if (otherItems) {
-      game = await Game.findOneAndUpdate(
-        { title, party: { $elemMatch: { user } } },
-        {
-          $set: { "party.$.otherItems": otherItems },
         },
         { new: true }
       );
