@@ -33,6 +33,7 @@ module.exports = {
       wisdom,
       avatar,
       name,
+      level,
     } = req.body;
     let game = "";
 
@@ -292,6 +293,16 @@ module.exports = {
         { title, party: { $elemMatch: { user } } },
         {
           $set: { "party.$.name": name },
+        },
+        { new: true }
+      );
+    }
+    // level
+    if (level || level === 0) {
+      game = await Game.findOneAndUpdate(
+        { title, party: { $elemMatch: { user } } },
+        {
+          $set: { "party.$.level": level },
         },
         { new: true }
       );
