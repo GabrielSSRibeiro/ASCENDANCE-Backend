@@ -41,11 +41,11 @@ const CharacterSchema = new mongoose.Schema({
   attack: Number,
   damage: Number,
   initiative: String,
-  dodge: Number,
+  evade: Number,
   defense: Number,
 
   currentAction1: String,
-  currentAction2: String
+  currentAction2: String,
 });
 
 module.exports = mongoose.model("Creature", CreatureSchema);
