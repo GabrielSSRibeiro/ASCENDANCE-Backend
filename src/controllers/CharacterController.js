@@ -8,6 +8,7 @@ module.exports = {
       title,
       GM,
       race,
+      origin,
       lifeDie,
       disciplines,
       selectedClass,
@@ -43,6 +44,16 @@ module.exports = {
         { title, GM, party: { $elemMatch: { user } } },
         {
           $set: { "party.$.race": race },
+        },
+        { new: true }
+      );
+    }
+    // origin
+    if (origin) {
+      game = await Game.findOneAndUpdate(
+        { title, GM, party: { $elemMatch: { user } } },
+        {
+          $set: { "party.$.origin": origin },
         },
         { new: true }
       );

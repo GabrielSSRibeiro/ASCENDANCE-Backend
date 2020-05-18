@@ -22,7 +22,8 @@ const CharacterSchema = new mongoose.Schema({
   modifingAscension: Number,
 
   race: { type: String, default: "" }, //
-  lifeDie: { type: Number, default: 0 }, //
+  origin: { type: String, default: "" }, //
+  lifeDie: { type: Number, default: 0 },
   class: { type: String, default: "" }, //
   defensiveSpecialty: { type: String, default: "" }, //
   ofensiveSpecialty: { type: String, default: "" }, //
