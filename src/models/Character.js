@@ -23,8 +23,10 @@ const CharacterSchema = new mongoose.Schema({
 
   race: { type: String, default: "" }, //
   origin: { type: String, default: "" }, //
+  origin2: { type: String, default: "" },
   lifeDie: { type: Number, default: 0 },
   class: { type: String, default: "" }, //
+  class2: { type: String, default: "" },
   defensiveSpecialty: { type: String, default: "" }, //
   ofensiveSpecialty: { type: String, default: "" }, //
 
