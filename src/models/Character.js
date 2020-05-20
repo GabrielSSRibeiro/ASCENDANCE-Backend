@@ -46,8 +46,9 @@ const CharacterSchema = new mongoose.Schema({
   dexterity: { type: Number, default: 0 },
   wisdom: { type: Number, default: 0 },
 
-  dsciplines: { type: Number, default: 0 }, //
+  disciplines: { type: Number, default: 0 }, //
   maximumPower: { type: Number, default: 50 },
+  minimumPower: { type: Number, default: 0 },
   feel: { type: Number, default: 0 },
   create: { type: Number, default: 0 },
   change: { type: Number, default: 0 },
