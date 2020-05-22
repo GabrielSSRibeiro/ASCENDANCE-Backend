@@ -35,7 +35,7 @@ const CharacterSchema = new mongoose.Schema({
   personality: { type: String, default: "" }, //
   occupation: { type: String, default: "" },
   goal: { type: String, default: "" },
-  flaws: { type: String, default: "" },
+  flaw: { type: String, default: "" },
 
   firstAlignment: { type: String, default: "" }, //
   secondAlignment: { type: String, default: "" },
