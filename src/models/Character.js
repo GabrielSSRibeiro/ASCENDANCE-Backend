@@ -3,7 +3,7 @@ const ItemSchema = require("./Item");
 
 const CharacterSchema = new mongoose.Schema({
   user: String,
-  name: String, //
+  name: { type: String, default: "" }, //
   avatar: String,
   notesGM: { type: String, default: "" },
   notes: { type: String, default: "" },

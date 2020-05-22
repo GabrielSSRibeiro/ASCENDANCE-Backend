@@ -71,7 +71,7 @@ module.exports = {
           { new: true }
         );
 
-        //sochet message to the members of the game
+        //socket message to the members of the game
         sendMessage(game.party, "newMember");
       } else {
         game = "member";
@@ -85,10 +85,10 @@ module.exports = {
 
   // deletar um jogo do jogador
   async deletePlayer(req, res) {
-    let { title, playerUser } = req.query;
+    let { title, GM, playerUser } = req.query;
 
     const game = await Game.findOneAndUpdate(
-      { title },
+      { title, GM },
       { $pull: { party: { user: playerUser } } },
       { new: true }
     );
