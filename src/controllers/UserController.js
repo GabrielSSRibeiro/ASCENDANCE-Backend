@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const sendMail = require("../views/mailer");
 
 module.exports = {
   async index(req, res) {
@@ -39,12 +40,19 @@ module.exports = {
       newUser = await User.create({
         nickName,
         email,
-        password: encryptPassword
+        password: encryptPassword,
       });
+
+      // sendMail({
+      //   from: "Gabriel Ribeiro <gabriel210292@gmail.com>",
+      //   to: email,
+      //   subject: "Welcome!",
+      //   template: "auth/signUp",
+      // });
     } else {
       newUser = "";
     }
 
     return res.json(newUser);
-  }
+  },
 };
