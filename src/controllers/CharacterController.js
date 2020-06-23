@@ -8,20 +8,20 @@ module.exports = {
     const { title, GM, user, ...args } = req.body;
 
     // add avatar url to agrs
-    if (req.file) {
-      const filePath = req.file.path;
-      const fileId = [title, GM, user].join("-");
+    // if (req.file) {
+    //   const filePath = req.file.path;
+    //   const fileId = [title, GM, user].join("-");
 
-      const uploadedResponse = await cloudinary.v2.uploader.upload(filePath, {
-        upload_preset: "essencia_avatars",
-        public_id: fileId,
-      });
+    //   const uploadedResponse = await cloudinary.v2.uploader.upload(filePath, {
+    //     upload_preset: "essencia_avatars",
+    //     public_id: fileId,
+    //   });
 
-      fs.unlinkSync(filePath);
+    //   fs.unlinkSync(filePath);
 
-      const avatar = uploadedResponse.secure_url;
-      args.avatar = avatar;
-    }
+    //   const avatar = uploadedResponse.secure_url;
+    //   args.avatar = avatar;
+    // }
 
     let game;
 
