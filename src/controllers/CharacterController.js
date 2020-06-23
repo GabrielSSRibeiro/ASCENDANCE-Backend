@@ -7,7 +7,7 @@ module.exports = {
   async update(req, res) {
     const { title, GM, user, ...args } = req.body;
 
-    // add avatar url to agrs array
+    // add avatar url to agrs
     if (req.file) {
       const filePath = req.file.path;
       const fileId = [title, GM, user].join("-");
