@@ -49,6 +49,7 @@ module.exports = {
       //   subject: "Welcome!",
       //   template: "auth/signUp",
       // });
+      // add convert to text
     } else {
       newUser = "";
     }

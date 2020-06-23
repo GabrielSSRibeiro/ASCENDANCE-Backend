@@ -1,6 +1,7 @@
 const Game = require("../models/Game");
 const User = require("../models/User");
 const { sendMessage } = require("../views/websocket");
+const { cloudinary } = require("../../config/cloudinary");
 
 module.exports = {
   //lista de jogos GM
@@ -93,6 +94,12 @@ module.exports = {
       { new: true }
     );
 
+    //     delete avatar
+    const fileId = [title, GM, playerUser].join("-");
+    await cloudinary.v2.uploader.destroy(`ESSENCIA_avatars/${fileId}`, {
+      invalidate: true,
+    });
+
     return res.json(game);
   },
 
@@ -100,7 +107,7 @@ module.exports = {
   async deleteGM(req, res) {
     const { GM, title } = req.query;
 
-    await Game.deleteOne({
+    const deletedGame = await Game.findOneAndDelete({
       GM,
       title,
     });
@@ -108,6 +115,16 @@ module.exports = {
     const games = await Game.find({
       GM,
     });
+
+    //     delete avatars
+    await Promise.all(
+      deletedGame.party.map(async (player) => {
+        const fileId = [title, GM, player.user].join("-");
+        await cloudinary.v2.uploader.destroy(`ESSENCIA_avatars/${fileId}`, {
+          invalidate: true,
+        });
+      })
+    );
 
     return res.json(games);
   },
