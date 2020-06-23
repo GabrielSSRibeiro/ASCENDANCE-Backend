@@ -3,19 +3,19 @@ const crypto = require("crypto");
 const path = require("path");
 
 module.exports = {
-  // storage: multer.memoryStorage(),
+  storage: multer.memoryStorage(),
 
-  storage: multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.resolve(__dirname, "..", "src", "uploads"));
-    },
-    filename(request, file, cb) {
-      const hash = crypto.randomBytes(6).toString("hex");
-      const fileName = `${hash}-${file.originalname}`;
+  // storage: multer.diskStorage({
+  //   destination: function (req, file, cb) {
+  //     cb(null, path.resolve(__dirname, "..", "src", "uploads"));
+  //   },
+  //   filename(request, file, cb) {
+  //     const hash = crypto.randomBytes(6).toString("hex");
+  //     const fileName = `${hash}-${file.originalname}`;
 
-      cb(null, fileName);
-    },
-  }),
+  //     cb(null, fileName);
+  //   },
+  // }),
 
   limits: { fileSIze: 2 * 1024 * 1024 },
 
