@@ -1,4 +1,3 @@
-// const fs = require("fs");
 const { cloudinary } = require("../../config/cloudinary");
 const Game = require("../models/Game");
 
@@ -9,7 +8,6 @@ module.exports = {
 
     // add avatar url to agrs
     if (req.file) {
-      // const filePath = req.file.path;
       const filePath = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
       const fileId = [title, GM, user].join("-");
 
@@ -17,8 +15,6 @@ module.exports = {
         upload_preset: "essencia_avatars",
         public_id: fileId,
       });
-
-      // fs.unlinkSync(filePath);
 
       const avatar = uploadedResponse.secure_url;
       args.avatar = avatar;
