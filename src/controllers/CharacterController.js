@@ -1,4 +1,4 @@
-const fs = require("fs");
+// const fs = require("fs");
 const { cloudinary } = require("../../config/cloudinary");
 const Game = require("../models/Game");
 
@@ -8,20 +8,21 @@ module.exports = {
     const { title, GM, user, ...args } = req.body;
 
     // add avatar url to agrs
-    // if (req.file) {
-    //   const filePath = req.file.path;
-    //   const fileId = [title, GM, user].join("-");
+    if (req.file) {
+      // const filePath = req.file.path;
+      const filePath = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`;
+      const fileId = [title, GM, user].join("-");
 
-    //   const uploadedResponse = await cloudinary.v2.uploader.upload(filePath, {
-    //     upload_preset: "essencia_avatars",
-    //     public_id: fileId,
-    //   });
+      const uploadedResponse = await cloudinary.v2.uploader.upload(filePath, {
+        upload_preset: "essencia_avatars",
+        public_id: fileId,
+      });
 
-    //   fs.unlinkSync(filePath);
+      // fs.unlinkSync(filePath);
 
-    //   const avatar = uploadedResponse.secure_url;
-    //   args.avatar = avatar;
-    // }
+      const avatar = uploadedResponse.secure_url;
+      args.avatar = avatar;
+    }
 
     let game;
 
