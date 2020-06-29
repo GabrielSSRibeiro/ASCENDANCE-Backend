@@ -2,6 +2,20 @@ const { cloudinary } = require("../../config/cloudinary");
 const Game = require("../models/Game");
 
 module.exports = {
+  // return player
+  async show(req, res) {
+    const { GM, title, user } = req.query;
+
+    const game = await Game.findOne({
+      GM,
+      title,
+    });
+
+    const player = game.party.find((value) => value.user === user);
+
+    return res.json(player);
+  },
+
   //atualizar personagem
   async update(req, res) {
     const { title, GM, user, ...args } = req.body;

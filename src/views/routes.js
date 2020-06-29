@@ -25,4 +25,9 @@ routes.put("/char-creation", upload.single("avatar"), CharacterController.update
 routes.get("/gm-panel", GameController.show);
 routes.put("/gm-management", GameController.update);
 
+//player
+routes.get("/player-character", CharacterController.show);
+
 module.exports = routes;
+
+// response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
