@@ -4,7 +4,8 @@ const Game = require("../models/Game");
 module.exports = {
   // return player
   async show(req, res) {
-    const { GM, title, user } = req.query;
+    const { GM, title } = req.query;
+    const user = req.user;
 
     const game = await Game.findOne({
       GM,
@@ -18,7 +19,8 @@ module.exports = {
 
   //atualizar personagem
   async update(req, res) {
-    const { title, GM, user, ...args } = req.body;
+    const { title, GM, ...args } = req.body;
+    const user = req.user;
 
     // add avatar url to agrs
     if (req.file) {

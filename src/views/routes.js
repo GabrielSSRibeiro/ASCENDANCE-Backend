@@ -3,13 +3,15 @@ const routes = Router();
 const multer = require("multer");
 const multerConfig = require("../../config/multer");
 const upload = multer(multerConfig);
+const AuthMiddleware = require("../middlewares/auth");
 
 const UserController = require("../controllers/UserController");
 const GameController = require("../controllers/GameController");
 const CharacterController = require("../controllers/CharacterController");
 
+routes.use(AuthMiddleware);
+
 routes.get("/users", UserController.index);
-routes.get("/user", UserController.show);
 routes.post("/users", UserController.store);
 
 routes.get("/player-games", GameController.indexPlayer);
@@ -29,5 +31,3 @@ routes.put("/gm-management", GameController.update);
 routes.get("/player-character", CharacterController.show);
 
 module.exports = routes;
-
-// response.setHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");

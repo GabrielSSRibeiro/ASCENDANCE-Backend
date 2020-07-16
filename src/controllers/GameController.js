@@ -6,7 +6,7 @@ const { cloudinary } = require("../../config/cloudinary");
 module.exports = {
   //lista de jogos GM
   async indexGM(req, res) {
-    const { GM } = req.query;
+    const GM = req.user;
 
     const games = await Game.find({
       GM,
@@ -16,7 +16,7 @@ module.exports = {
   },
   //lista de jogos que o jogador está na party
   async indexPlayer(req, res) {
-    const { user } = req.query;
+    const user = req.user;
 
     const games = await Game.find({
       "party.user": user,
@@ -27,7 +27,8 @@ module.exports = {
 
   // party de um jogo especifico
   async show(req, res) {
-    const { GM, title } = req.query;
+    const { title } = req.query;
+    const GM = req.user;
 
     const game = await Game.findOne({
       GM,
@@ -39,7 +40,8 @@ module.exports = {
 
   //criando novo jogo
   async store(req, res) {
-    const { GM, title } = req.body;
+    const { title } = req.body;
+    const GM = req.user;
 
     let newGame = await Game.findOne({ GM, title });
 
@@ -57,7 +59,8 @@ module.exports = {
 
   //adicionando membros a party
   async update(req, res) {
-    const { GM, title, playerUser } = req.body;
+    const { title, playerUser } = req.body;
+    const GM = req.user;
 
     const foundPlayer = await User.findOne({ nickName: playerUser });
     const partyMember = await Game.findOne({ GM, title, "party.user": playerUser });
@@ -88,6 +91,13 @@ module.exports = {
   async deletePlayer(req, res) {
     let { title, GM, playerUser } = req.query;
 
+    //defining the user
+    if (!playerUser) {
+      playerUser = req.user;
+    } else {
+      GM = req.user;
+    }
+
     const game = await Game.findOneAndUpdate(
       { title, GM },
       { $pull: { party: { user: playerUser } } },
@@ -105,7 +115,8 @@ module.exports = {
 
   // deletar um jogo do GM
   async deleteGM(req, res) {
-    const { GM, title } = req.query;
+    const { title } = req.query;
+    const GM = req.user;
 
     const deletedGame = await Game.findOneAndDelete({
       GM,

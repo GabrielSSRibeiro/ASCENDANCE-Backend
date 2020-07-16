@@ -16,7 +16,6 @@ const ItemSchema = new mongoose.Schema({
   wisdom: { type: Number, default: 0 },
 
   unique: { type: String, default: "" },
-  unidentitied: { type: Boolean, default: false },
 });
 
 module.exports = ItemSchema;
