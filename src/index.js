@@ -29,11 +29,11 @@ const allowCrossDomain = function (req, res, next) {
     "Content-Type, Authorization, Content-Length, X-Requested-With"
   );
 
-  // if ("OPTIONS" == req.method) {
-  //   res.send(200);
-  // } else {
-  next();
-  // }
+  if ("OPTIONS" == req.method) {
+    res.send(200);
+  } else {
+    next();
+  }
 };
 app.use(allowCrossDomain);
 app.use(express.json());
