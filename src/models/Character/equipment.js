@@ -1,14 +1,20 @@
-const ItemSchema = require("../Item");
+const {
+  WeaponSchema,
+  protectionSchema,
+  accesorySchema,
+  potionSchema,
+  scrollSchema,
+} = require("../Item");
 
 module.exports = {
-  equipWeapon1: { type: ItemSchema, default: null },
-  equipWeapon2: { type: ItemSchema, default: null },
-  equipArmor1: { type: ItemSchema, default: null },
-  equipArmor2: { type: ItemSchema, default: null },
-  equipAccessory1: { type: ItemSchema, default: null },
-  equipAccessory2: { type: ItemSchema, default: null },
-  equipAccessory3: { type: ItemSchema, default: null },
-  equipAccessory4: { type: ItemSchema, default: null },
-  equipPotion: String,
-  equipScroll: String,
+  equipWeapon1: { type: WeaponSchema, default: null },
+  equipWeapon2: { type: WeaponSchema, default: null },
+  equipArmor1: { type: protectionSchema, default: null },
+  equipArmor2: { type: protectionSchema, default: null },
+  equipAccessory1: { type: accesorySchema, default: null },
+  equipAccessory2: { type: accesorySchema, default: null },
+  equipAccessory3: { type: accesorySchema, default: null },
+  equipAccessory4: { type: accesorySchema, default: null },
+  equipPotion: { type: potionSchema, default: null },
+  equipScroll: { type: scrollSchema, default: null },
 };

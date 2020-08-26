@@ -1,9 +1,16 @@
-const ItemSchema = require("../Item");
+const {
+  WeaponSchema,
+  protectionSchema,
+  accesorySchema,
+  potionSchema,
+  scrollSchema,
+} = require("../Item");
 
 module.exports = {
-  weapons: [ItemSchema],
-  protections: [ItemSchema],
-  acessories: [ItemSchema],
-  potions: [ItemSchema],
-  scrolls: [ItemSchema],
+  weapons: [WeaponSchema],
+  protections: [protectionSchema],
+  accessories: [accesorySchema],
+  potions: [potionSchema],
+  scrolls: [scrollSchema],
+  // materials: [ItemSchema],
 };
