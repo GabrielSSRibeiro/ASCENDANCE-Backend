@@ -11,7 +11,7 @@ const server = http.Server(app);
 setupWebsocket(server);
 
 mongoose.connect(
-  "mongodb+srv://admin-Gabriel:12351235@cluster0-l8gqo.mongodb.net/ESSENCIA?retryWrites=true&w=majority",
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0-l8gqo.mongodb.net/ESSENCIA?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
